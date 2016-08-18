@@ -1,11 +1,11 @@
 Name:           steamos-modeswitch-inhibitor
-Version:        1.9.2
+Version:        1.10
 Release:        1%{?dist}
 Summary:        SteamOS Mode Switch Inhibitor
 
 License:        BSD
 URL:            http://store.steampowered.com/steamos/
-Source0:        http://repo.steampowered.com/steamos/pool/main/s/%{name}/%{name}_%{version}.tar.gz
+Source0:        http://repo.steampowered.com/steamos/pool/main/s/%{name}/%{name}_%{version}.tar.xz
  
 BuildRequires:  autoconf
 BuildRequires:  automake
@@ -54,6 +54,9 @@ rm -fr %{buildroot}%{_docdir}/%{name}
 %{_libdir}/libmodeswitch_inhibitor.so
 
 %changelog
+* Fri Apr 01 2016 Simone Caronni <negativo17@gmail.com> - 1.10-1
+- Update to 1.10.
+
 * Fri Jul 31 2015 Simone Caronni <negativo17@gmail.com> - 1.9.2-1
 - Update to 1.9.2.
 
