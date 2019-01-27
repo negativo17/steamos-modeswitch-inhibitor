@@ -1,6 +1,6 @@
 Name:           steamos-modeswitch-inhibitor
 Version:        1.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        SteamOS Mode Switch Inhibitor
 
 License:        BSD
@@ -9,25 +9,17 @@ Source0:        http://repo.steampowered.com/steamos/pool/main/s/%{name}/%{name}
  
 BuildRequires:  autoconf
 BuildRequires:  automake
-BuildRequires:  libX11-devel
-BuildRequires:  libXxf86vm-devel
-BuildRequires:  libXrandr-devel
-BuildRequires:  libXrender-devel
-BuildRequires:  libXcomposite-devel
 BuildRequires:  libtool
+BuildRequires:  libXcomposite-devel
 BuildRequires:  mesa-libGL-devel
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(xrandr)
+BuildRequires:  pkgconfig(xrender)
+BuildRequires:  pkgconfig(xxf86vm)
 
 %description
 Shared library which fakes any mode switch attempts to prevent full screen apps
 from changing resolution.
-
-%package devel
-Summary:        Development files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
-
-%description devel
-The %{name}-devel package contains libraries and
-header files for developing applications that use %{name}.
 
 %prep
 %setup -q
@@ -35,25 +27,25 @@ header files for developing applications that use %{name}.
 %build
 autoreconf -vif
 %configure --disable-static
-make %{?_smp_mflags}
+%make_build
 
 %install
 %make_install
 find %{buildroot} -name "*.la" -delete
+find %{buildroot} -name "*.so" -delete
 rm -fr %{buildroot}%{_docdir}/%{name}
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files
 %doc debian/copyright debian/changelog
 %{_libdir}/libmodeswitch_inhibitor.so.*
 
-%files devel
-%{_libdir}/libmodeswitch_inhibitor.so
-
 %changelog
+* Sun Jan 27 2019 Simone Caronni <negativo17@gmail.com> - 1.10-2
+- Update SPEC file.
+- Remove devel subpackage.
+
 * Fri Apr 01 2016 Simone Caronni <negativo17@gmail.com> - 1.10-1
 - Update to 1.10.
 
