@@ -9,6 +9,7 @@ Source0:        http://repo.steampowered.com/steamos/pool/main/s/%{name}/%{name}
  
 BuildRequires:  autoconf
 BuildRequires:  automake
+BuildRequires:  gcc
 BuildRequires:  libtool
 BuildRequires:  libXcomposite-devel
 BuildRequires:  mesa-libGL-devel
